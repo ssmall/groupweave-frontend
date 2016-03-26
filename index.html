@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Groupweave — Collaborative Storytelling</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js"
+            integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
+            crossorigin="anonymous"></script>
+    <script src="js/index.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Groupweave</h1>
+        <h3>Collaborative Storytelling Game</h3>
+    </header>
+    <div class="main">
+        <label for="playerName">Player Name:</label><input id="playerName" type="text" placeholder="Your Name"/>
+        <br/>
+        <br/>
+        <button onclick="hostGame(event);">Host Game</button>
+        <br/>
+        <input type="text" size="4"  title="Room Code" placeholder="XXXX"/><button>Join Game</button>
+    </div>
+</body>
+</html>

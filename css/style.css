@@ -1,0 +1,31 @@
+body
+{
+    background: radial-gradient(ellipse at center, #00A6FF 0%,#3D89B5 100%);
+    width: 100%;
+    height: 100%;
+    min-width: 500px;
+    min-height: 800px;
+}
+
+header
+{
+    text-align: center;
+}
+
+header h1
+{
+    font-family: Chalkduster, cursive;
+}
+
+header h3
+{
+    font-weight: normal;
+    font-style: italic;
+}
+
+div.main
+{
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
