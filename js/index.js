@@ -15,7 +15,8 @@ $(function(){
             var data = JSON.parse(dataJson);
             window.location.href = "host.html?"+ $.param({
                     'roomCode': data.gameId,
-                    'token': data.hostToken
+                    'token': data.hostToken,
+                    'queueUrl': data.queueUrl
                 });
         });
         request.fail(function(error){
