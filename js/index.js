@@ -31,8 +31,7 @@ $(function(){
             url: ENDPOINT+"/"+gameId+"/join",
             contentType: 'application/json; charset=UTF-8',
             data: JSON.stringify({
-                'name': playerName,
-                'gameId': gameId
+                'name': playerName
             })
         });
         request.done(function(dataJson){
