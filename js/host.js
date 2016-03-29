@@ -124,5 +124,15 @@ $(function () {
 
     sqsHandler.start();
 
-
+    window.startGame = function(){
+        var request = postRequest(window.roomCode+'/start', {
+            'token': $.url('?').token
+        });
+        request.done(function(){
+            showNotification("Game started!");
+        });
+        request.fail(function(){
+            showNotification("Failed to start game!");
+        });
+    };
 });

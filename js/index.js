@@ -1,15 +1,11 @@
-ENDPOINT = "https://k18q71fw3c.execute-api.us-east-1.amazonaws.com/test/game";
+'use strict';
 
 $(function(){
     var $playerName = $("input#playerName");
     window.hostGame = function hostGame(event){
         var playerName = $playerName.val();
-        var request = $.post({
-            url: ENDPOINT+"/new",
-            contentType: 'application/json; charset=UTF-8',
-            data: JSON.stringify({
-                'name': playerName
-            })
+        var request = postRequest("new", {
+            'name': playerName
         });
         request.done(function(dataJson){
             var data = JSON.parse(dataJson);
@@ -27,12 +23,8 @@ $(function(){
     window.joinGame = function joinGame(event) {
         var playerName = $playerName.val();
         var gameId = $("input#gameId").val();
-        var request = $.post({
-            url: ENDPOINT+"/"+gameId+"/join",
-            contentType: 'application/json; charset=UTF-8',
-            data: JSON.stringify({
+        var request = postRequest(gameId+"/join", {
                 'name': playerName
-            })
         });
         request.done(function(dataJson){
             var data = JSON.parse(dataJson);
