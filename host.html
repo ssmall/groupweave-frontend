@@ -14,7 +14,7 @@
     <script src="js/host.js"></script>
 </head>
 <body>
-    <div id="notification">Notification text</div>
+    <div id="notification"><!-- Notification text goes here --></div>
     <div id="contents">
         <div id="header"><!-- to be replaced by template --></div>
         <div id="main">
@@ -22,6 +22,7 @@
         </div>
         <footer>
             <ul id="playerList">
+                <!-- Contents will be replaced by rendered template -->
                 <script id="playerList-template" type="text/x-handlebars-template">
                     {{#each players}}
                         <li style="background-color: {{color}}" title="{{fullName}}">{{abbr}}</li>
