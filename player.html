@@ -2,19 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Groupweave — Collaborative Storytelling</title><link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title>Groupweave — Collaborative Storytelling</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <script src="https://code.jquery.com/jquery-2.2.2.min.js"
             integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
             crossorigin="anonymous"></script>
     <script src="js/lib/url.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.47.min.js"></script>
     <script src="js/common.js"></script>
     <script src="js/player.js"></script>
 </head>
 <body>
-    <div id="header"><!-- to be replaced by template --></div>
-    <div id="main">
-        <p>You are a player!</p>
+    <div id="notification"><!-- Notification text goes here --></div>
+    <div id="contents">
+        <div id="header"><!-- to be replaced by template --></div>
+        <div id="main">
+            <p>You are a player!</p>
+        </div>
     </div>
 </body>
 </html>

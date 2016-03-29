@@ -30,7 +30,8 @@ $(function(){
             var data = JSON.parse(dataJson);
             window.location.href = "player.html?" + $.param({
                     'roomCode': gameId,
-                    'token': data.playerToken
+                    'token': data.playerToken,
+                    'queueUrl': encodeURI(data.queueUrl)
                 });
         });
         request.fail(function(error){
