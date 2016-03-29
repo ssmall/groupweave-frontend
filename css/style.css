@@ -29,3 +29,37 @@ div.main
     margin: 0 auto;
     text-align: center;
 }
+
+footer
+{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+ul#playerList
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul#playerList li
+{
+    float: left;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background-color: white;
+    border-radius: 50%;
+    text-align: center;
+    border: solid 1px black;
+    font-weight: bold;
+    cursor: default;
+}
+
+ul#playerList li:not(:first-child)
+{
+    margin-left: 10px;
+}

@@ -55,15 +55,63 @@ var SqsHandler = function (queueUrl) {
     return this;
 };
 
+function randomInt(min, max){
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function randomColor(){
+    var r = randomInt(0,256);
+    var g = randomInt(0,256);
+    var b = randomInt(0,256);
+    return "rgb("+r+","+g+","+b+")";
+}
+
+var Abbreviator = function(){
+    var allNames = [];
+
+    return {
+        'abbr' : function(name){
+            var endIndex = 1;
+            var abbreviation = name.substring(0,endIndex);
+            while (allNames.some(function(existingName){ return abbreviation == existingName })){
+                endIndex++;
+                abbreviation = name.substring(0,endIndex);
+            }
+            allNames.push(abbreviation);
+            return abbreviation;
+        }
+    };
+}();
+
+var players = [];
+
 
 $(function () {
+    var $playerList = $("#playerList");
+    var $playerListTemplate = $("#playerList-template");
+    var playerListTemplate = Handlebars.compile($playerListTemplate.html());
+    $playerListTemplate.remove();
+
     var queueUrl = $.url('?').queueUrl;
 
     var sqsHandler = new SqsHandler(queueUrl);
 
-    sqsHandler.onmessage = function(messageBody){
-        console.log("Message received:");
-        console.log(messageBody);
+    sqsHandler.onmessage = function(message){
+        var messageType = message.type;
+        var messageProperties = message.properties;
+        switch (messageType) {
+            case "PlayerJoined":
+                var playerName = messageProperties.player_name;
+                console.info("A player named "+ playerName+" joined!");
+                players.push({'abbr': Abbreviator.abbr(playerName),
+                              'fullName': playerName,
+                              'color': randomColor()});
+                $playerList.html(playerListTemplate({'players': players}));
+                break;
+            default:
+                console.error("Handling for message type '"+message.type+"' is not implemented!");
+                break;
+        }
     };
 
     sqsHandler.start();

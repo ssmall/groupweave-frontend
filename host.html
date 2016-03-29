@@ -18,5 +18,14 @@
     <div id="main">
         <p>You are the host!</p>
     </div>
+    <footer>
+        <ul id="playerList">
+            <script id="playerList-template" type="text/x-handlebars-template">
+                {{#each players}}
+                    <li style="background-color: {{color}}" title="{{fullName}}">{{abbr}}</li>
+                {{/each}}
+            </script>
+        </ul>
+    </footer>
 </body>
 </html>
