@@ -23,7 +23,20 @@ $(function(){
 
     messageHandler.start();
 
-    window.submitPrompt = function(){
-
+    window.submitPrompt = function(event){
+        var $target = $(event.target);
+        var $newPrompt = $("#newPrompt");
+        var request = postRequest(window.roomCode+"/submit", {
+            'token': $.url('?').token,
+            'prompt': $newPrompt.val()
+        });
+        request.done(function(){
+            $newPrompt.attr("editable", false);
+            $target.replaceWith($("<p>Prompt submitted!</p>"));
+        });
+        request.fail(function(errorCode, message){
+            console.error("Failed to submit prompt!\n"+errorCode+": "+message);
+            showNotification("Failed to submit prompt!", 3000);
+        });
     };
 });
