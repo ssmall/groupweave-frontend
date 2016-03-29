@@ -87,6 +87,14 @@ var players = [];
 
 
 $(function () {
+    var $notification = $("#notification");
+
+    var showNotification = function(text){
+        $notification.text(text);
+        $notification.toggleClass('show');
+        window.setTimeout(function(){ $notification.toggleClass('show') }, 1500);
+    };
+
     var $playerList = $("#playerList");
     var $playerListTemplate = $("#playerList-template");
     var playerListTemplate = Handlebars.compile($playerListTemplate.html());
@@ -102,11 +110,11 @@ $(function () {
         switch (messageType) {
             case "PlayerJoined":
                 var playerName = messageProperties.player_name;
-                console.info("A player named "+ playerName+" joined!");
                 players.push({'abbr': Abbreviator.abbr(playerName),
                               'fullName': playerName,
                               'color': randomColor()});
                 $playerList.html(playerListTemplate({'players': players}));
+                showNotification(playerName+" has joined the game!");
                 break;
             default:
                 console.error("Handling for message type '"+message.type+"' is not implemented!");
@@ -115,4 +123,6 @@ $(function () {
     };
 
     sqsHandler.start();
+
+
 });
