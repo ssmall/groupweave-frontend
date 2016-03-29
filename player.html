@@ -18,8 +18,15 @@
     <div id="contents">
         <div id="header"><!-- to be replaced by template --></div>
         <div id="main">
-            <p>You are a player!</p>
+            <p>Waiting for the game to start!</p>
         </div>
     </div>
+    <script id="newPrompt-template" type="text/x-handlebars-template">
+        <h4>Our Story So Far:</h4>
+        <p id="story">{{story}}</p>
+        <textarea id="newPrompt" placeholder="Start/continue the story"></textarea>
+        <br/>
+        <button onclick="submitPrompt();">Submit Prompt</button>
+    </script>
 </body>
 </html>

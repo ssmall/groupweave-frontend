@@ -34,6 +34,7 @@ var players = [];
 
 
 $(function () {
+    var $main = $("div#main");
 
     var $playerList = $("#playerList");
     var $playerListTemplate = $("#playerList-template");
@@ -63,6 +64,7 @@ $(function () {
         });
         request.done(function () {
             showNotification("Game started!");
+            $main.html("Please wait while the players submit their prompts.");
         });
         request.fail(function (errorData) {
             console.error(errorData.responseJSON.errorMessage);
