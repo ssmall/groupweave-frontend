@@ -1,3 +1,6 @@
+const DEFAULT_STORY = "No story yet! It's your job to get it started. Try opening with something like, \
+'Once upon a time'. Except, you know ... less clichéd.";
+
 function loadTemplate(id){
     var $template = $("#"+id);
     var template = Handlebars.compile($template.html());
@@ -18,7 +21,8 @@ $(function(){
         showNotification(playerName+" has joined the game!");
     });
     messageHandler.onmessage("GameStarted", function(){
-        $main.html(newPromptTemplate({'story': "No story yet! It's your job to get it started."}));
+        showNotification("Game started!");
+        $main.html(newPromptTemplate({'story': DEFAULT_STORY}));
     });
 
     messageHandler.start();
@@ -31,7 +35,7 @@ $(function(){
             'prompt': $newPrompt.val()
         });
         request.done(function(){
-            $newPrompt.attr("editable", false);
+            $newPrompt.attr("readonly", true);
             $target.replaceWith($("<p>Prompt submitted!</p>"));
         });
         request.fail(function(errorCode, message){

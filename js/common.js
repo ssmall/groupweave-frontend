@@ -1,8 +1,8 @@
 'use strict';
 
-var ENDPOINT = "https://k18q71fw3c.execute-api.us-east-1.amazonaws.com/test/game";
+const ENDPOINT = "https://k18q71fw3c.execute-api.us-east-1.amazonaws.com/test/game";
 
-var SQS_WAIT_TIME_SECONDS = 3;
+const SQS_WAIT_TIME_SECONDS = 3;
 
 // Initialize the Amazon Cognito credentials provider
 AWS.config.region = 'us-east-1'; // Region
