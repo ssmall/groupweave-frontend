@@ -11,13 +11,17 @@ function postRequest(path, data) {
 }
 
 $(function(){
-    window.roomCode = $.url('?').roomCode;
     var $header = $("#header");
-    var done = $.Deferred();
-    $header.load("js/template/header.hbs", function() { done.resolve(); });
-    done.then(function() {
-        $header.replaceWith(Handlebars.compile($header.html())({
-            'roomCode': window.roomCode
-        }));
-    });
+    if ($header.length > 0) {
+        window.roomCode = $.url('?').roomCode;
+        var done = $.Deferred();
+        $header.load("js/template/header.hbs", function () {
+            done.resolve();
+        });
+        done.then(function () {
+            $header.replaceWith(Handlebars.compile($header.html())({
+                'roomCode': window.roomCode
+            }));
+        });
+    }
 });

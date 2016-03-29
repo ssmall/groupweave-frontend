@@ -89,10 +89,13 @@ var players = [];
 $(function () {
     var $notification = $("#notification");
 
-    var showNotification = function(text){
+    var showNotification = function(text, timeout){
+        if (timeout === undefined) {
+            timeout = 1500;
+        }
         $notification.text(text);
         $notification.toggleClass('show');
-        window.setTimeout(function(){ $notification.toggleClass('show') }, 1500);
+        window.setTimeout(function(){ $notification.toggleClass('show') }, timeout);
     };
 
     var $playerList = $("#playerList");
@@ -131,8 +134,9 @@ $(function () {
         request.done(function(){
             showNotification("Game started!");
         });
-        request.fail(function(){
-            showNotification("Failed to start game!");
+        request.fail(function(errorData){
+            console.error(errorData.responseJSON.errorMessage);
+            showNotification("Failed to start game!", 3000);
         });
     };
 });
