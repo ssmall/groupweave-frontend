@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Groupweave — Collaborative Storytelling</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <script src="https://code.jquery.com/jquery-2.2.2.min.js"
             integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
             crossorigin="anonymous"></script>
@@ -19,19 +19,31 @@
         <div id="header"><!-- to be replaced by template --></div>
         <div id="main">
             <p>Once all players have joined, start the game!</p>
-            <br />
+            <br/>
             <button onclick="startGame();">Start Game</button>
+            <br/>
         </div>
         <footer>
             <ul id="playerList">
                 <!-- Contents will be replaced by rendered template -->
                 <script id="playerList-template" type="text/x-handlebars-template">
                     {{#each players}}
-                        <li style="background-color: {{color}}" title="{{fullName}}">{{abbr}}</li>
+                    <li style="background-color: {{color}}" title="{{fullName}}">{{abbr}}</li>
                     {{/each}}
                 </script>
             </ul>
         </footer>
     </div>
+    <script id="choosePrompts-template" type="text/x-handlebars-template">
+        <h4>The Story So Far:</h4>
+        <p id="story">{{story}}</p>
+        <ul id="promptList">
+            <li><span style="font-weight: bold">Choices:</span></li>
+            {{#each prompts}}
+            <li><input name="chosenPrompt" type="radio" value="{{text}}">{{text}}</li>
+            {{/each}}
+        </ul>
+        <button onclick="choosePrompt(event);">Submit Choice</button>
+    </script>
 </body>
 </html>

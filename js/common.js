@@ -90,6 +90,13 @@ function postRequest(path, data) {
     });
 }
 
+function loadTemplate(id){
+    var $template = $("#"+id);
+    var template = Handlebars.compile($template.html());
+    $template.remove();
+    return template;
+}
+
 $(function(){
     var $header = $("#header");
     if ($header.length > 0) {

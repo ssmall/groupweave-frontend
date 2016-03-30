@@ -1,13 +1,6 @@
 const DEFAULT_STORY = "No story yet! It's your job to get it started. Try opening with something like, \
 'Once upon a time'. Except, you know ... less clichéd.";
 
-function loadTemplate(id){
-    var $template = $("#"+id);
-    var template = Handlebars.compile($template.html());
-    $template.remove();
-    return template;
-}
-
 $(function(){
     var newPromptTemplate = loadTemplate("newPrompt-template");
 
