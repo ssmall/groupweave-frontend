@@ -1,8 +1,8 @@
 'use strict';
 
-const ENDPOINT = "https://k18q71fw3c.execute-api.us-east-1.amazonaws.com/test/game";
+var ENDPOINT = "https://k18q71fw3c.execute-api.us-east-1.amazonaws.com/test/game";
 
-const SQS_WAIT_TIME_SECONDS = 3;
+var SQS_WAIT_TIME_SECONDS = 3;
 
 // Initialize the Amazon Cognito credentials provider
 AWS.config.region = 'us-east-1'; // Region
@@ -16,7 +16,7 @@ var sqs = new AWS.SQS({
     region: "us-east-1"
 });
 
-var SqsHandler = function (queueUrl) {
+window.SqsHandler = function (queueUrl) {
     console.info("Connecting to SQS queue with URL: " + queueUrl);
 
     var thisHandler = this;
@@ -57,7 +57,7 @@ var SqsHandler = function (queueUrl) {
     return this;
 };
 
-var GameMessageHandler = function(queueUrl){
+window.GameMessageHandler = function(queueUrl){
     var sqsHandler = new SqsHandler(queueUrl);
     var messageTypeCallbacks = {};
 
@@ -82,7 +82,7 @@ var GameMessageHandler = function(queueUrl){
 };
 
 
-function postRequest(path, data) {
+window.postRequest = function postRequest(path, data) {
     return $.post({
         url: ENDPOINT + '/' + path,
         contentType: 'application/json; charset=UTF-8',
@@ -90,7 +90,7 @@ function postRequest(path, data) {
     });
 }
 
-function loadTemplate(id){
+window.loadTemplate = function loadTemplate(id){
     var $template = $("#"+id);
     var template = Handlebars.compile($template.html());
     $template.remove();

@@ -31,7 +31,7 @@ var Abbreviator = function () {
 }();
 
 var Story = function(){
-    const DEFAULT_STORY = "There's no story yet! Choose the prompt that best begins our tale.";
+    var DEFAULT_STORY = "There's no story yet! Choose the prompt that best begins our tale.";
 
     var storySoFar = null;
 
