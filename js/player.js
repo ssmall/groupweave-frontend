@@ -17,6 +17,20 @@ $(function(){
         showNotification("Game started!");
         $main.html(newPromptTemplate({'story': DEFAULT_STORY}));
     });
+    messageHandler.onmessage("StoryUpdate", function(message){
+        var deferred = showNotification("The host has chosen a prompt!");
+        if (message.is_final_round){
+            deferred.then(function(){
+               showNotification("This is the final round! Try to wrap up the story.", 3000);
+            });
+        }
+        $main.html(newPromptTemplate({'story': message.story}));
+    });
+
+    messageHandler.onmessage("Done", function(message){
+        $("#story").text(message.story);
+        showNotification("Game over! The winner is "+message.winner+"!", 30000);
+    });
 
     messageHandler.start();
 

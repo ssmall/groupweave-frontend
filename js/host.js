@@ -63,9 +63,9 @@ $(function () {
 
     var choosePromptsTemplate = loadTemplate("choosePrompts-template");
 
-    var queueUrl = $.url('?').queueUrl;
+    var token = $.url('?').token;
 
-    var messageHandler = new GameMessageHandler(queueUrl);
+    var messageHandler = new GameMessageHandler($.url('?').queueUrl);
     messageHandler.onmessage("PlayerJoined", function (message) {
         var playerName = message.player_name;
         players.push({
@@ -77,6 +77,7 @@ $(function () {
         showNotification(playerName + " has joined the game!");
 
     });
+
     messageHandler.onmessage("NewPrompts", function(message){
         var prompts = message.prompts.map(function (text){
            return {'text': text};
@@ -86,11 +87,15 @@ $(function () {
                                           'prompts': prompts}));
     });
 
-    messageHandler.start();
+    messageHandler.onmessage("Done", function(message){
+        $("#story").text(message.story);
+        showNotification("Game over! The winner is "+message.winner+"!", 30000);
+    });
 
+    messageHandler.start();
     window.startGame = function() {
         var request = postRequest(window.roomCode + '/start', {
-            'token': $.url('?').token
+            'token': token
         });
         request.done(function () {
             showNotification("Game started!");
@@ -109,9 +114,19 @@ $(function () {
             showNotification("Please make a choice!", 3000);
         } else {
             var selectedPrompt = $chosenRadio.val();
-            Story.updateStory(selectedPrompt);
-            $("#story").text(Story.storySoFar);
-            $target.replaceWith($("<p>Submitted!</p>"));
+            var submitRequest = postRequest(window.roomCode+"/choose", {
+                'token': token,
+                'prompt': selectedPrompt
+            });
+            submitRequest.done(function(){
+                Story.updateStory(selectedPrompt);
+                $("#story").text(Story.storySoFar);
+                $target.replaceWith($("<p>Submitted!</p>"));
+            });
+            submitRequest.fail(function(errorCode, message){
+                console.error("Unable to submit prompt!\n"+errorCode+": "+message);
+                showNotification("Unable to submit prompt!", 3000);
+            });
         }
     };
 });

@@ -119,11 +119,14 @@ $(function(){
             if (timeout === undefined) {
                 timeout = 1500;
             }
+            var deferred = $.Deferred();
             $notification.text(text);
             $notification.toggleClass('show');
             window.setTimeout(function () {
-                $notification.toggleClass('show')
+                $notification.toggleClass('show');
+                deferred.resolve();
             }, timeout);
+            return deferred;
         };
     }
 });
