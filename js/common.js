@@ -88,14 +88,14 @@ window.postRequest = function postRequest(path, data) {
         contentType: 'application/json; charset=UTF-8',
         data: JSON.stringify(data)
     });
-}
+};
 
 window.loadTemplate = function loadTemplate(id){
     var $template = $("#"+id);
     var template = Handlebars.compile($template.html());
     $template.remove();
     return template;
-}
+};
 
 $(function(){
     var $header = $("#header");

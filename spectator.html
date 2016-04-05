@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=500px, height=800px">
+    <title>Groupweave — Collaborative Storytelling</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js"
+            integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
+            crossorigin="anonymous"></script>
+    <script src="js/lib/url.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.2.47.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/spectator.js"></script>
+</head>
+<body>
+    <div id="notification"><!-- Notification text goes here --></div>
+    <div id="contents">
+        <div id="header"><!-- to be replaced by template --></div>
+        <div id="main">
+            <p>Waiting for the game to start!</p>
+        </div>
+    </div>
+    <script id="story-template" type="text/x-handlebars-template">
+        <div id="storyContainer">
+            <h4>The story so far:</h4>
+            <p id="story">{{story}}</p>
+            {{#if finalRound}}
+            <p style="font-weight: bold; font-style: italic">This is the last round!</p>
+            {{/if}}
+        </div>
+    </script>
+    <script id="prompts-template" type="text/x-handlebars-template">
+        <ul id="promptList">
+            <li style="font-weight: bold">Players submitted the following prompts:</li>
+            {{#each prompts}}
+            <li>{{text}}</li>
+            {{/each}}
+        </ul>
+    </script>
+    <script id="finished-story-template" type="text/x-handlebars-template">
+        <h4>The final story:</h4>
+        <p>{{story}}</p>
+        <p style="font-style: italic">
+            The winner of the game is:
+            <span style="font-weight: bold">{{winner}}</span>
+        </p>
+    </script>
+</body>
+</html>
