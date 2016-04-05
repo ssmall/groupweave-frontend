@@ -1,5 +1,9 @@
 'use strict';
 
+var audio_gameInProgress = new Audio("audio/in_progress.wav");
+var audio_gameOver = new Audio("audio/game_over.wav");
+var audio_update = new Audio("audio/update.wav");
+
 $(function(){
     var $main = $("div#main");
     var promptsTemplate = loadTemplate("prompts-template");
@@ -16,6 +20,8 @@ $(function(){
 
     messageHandler.onmessage("GameStarted", function(){
         $main.html($("<p>Game started! Waiting for players to begin weaving a tale ...</p>"));
+        audio_gameInProgress.loop = true;
+        audio_gameInProgress.play();
     });
 
     messageHandler.onmessage("NewPrompts", function(message){
@@ -24,6 +30,7 @@ $(function(){
         });
 
         $main.append(promptsTemplate({'prompts': prompts}));
+        audio_update.play();
     });
 
     messageHandler.onmessage("StoryUpdate", function(message){
@@ -31,12 +38,16 @@ $(function(){
         var renderedTemplate = storyTemplate({'story': message.story,
             'finalRound': message.is_final_round});
         $main.html(renderedTemplate);
+        audio_update.play();
     });
 
     messageHandler.onmessage("Done", function(message){
         $("#promptList").remove();
         $("div#storyContainer").remove();
         $main.html(finishedStoryTemplate(message));
+        audio_gameInProgress.pause();
+        audio_gameOver.loop = true;
+        audio_gameOver.play();
     });
 
     messageHandler.start();
